@@ -1,6 +1,9 @@
 #include "Level.h"
+#include <cmath>
 
-
+sf::Vector2f startOfDragPos= sf::Vector2f(0, 0);
+sf::Vector2f endOfDragPos= sf::Vector2f(0, 0);
+bool dragging = false;
 
 Level::Level(sf::RenderWindow* hwnd, Input* in)
 {
@@ -42,6 +45,20 @@ void Level::handleInput()
 	if (input->isKeyDown(sf::Keyboard::Escape))
 	{
 		window->close();
+	}
+	if (input->isMouseLDown() && !dragging)
+	{
+		dragging = true;
+		startOfDragPos = sf::Vector2f(input->getMouseX(), input->getMouseY());
+	}
+	else if (!input->isMouseLDown() && dragging)
+	{
+		dragging = false;
+		endOfDragPos = sf::Vector2f(input->getMouseX(), input->getMouseY());
+		int diffInX = startOfDragPos.x - endOfDragPos.x;
+		int diffInY = startOfDragPos.y - endOfDragPos.y;
+		double difference = sqrt((diffInX * diffInX) + (diffInY * diffInY));
+		std::cout << "The mouse drag distance was " << difference << std::endl;
 	}
 }
 
