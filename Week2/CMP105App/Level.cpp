@@ -1,5 +1,7 @@
 #include "Level.h"
 
+
+
 Level::Level(sf::RenderWindow* hwnd, Input* in)
 {
 	window = hwnd;
@@ -17,8 +19,22 @@ Level::~Level()
 // handle user input
 void Level::handleInput()
 {
-
-
+	if (input->isKeyDown(sf::Keyboard::W))
+	{
+		std::cout << "W is being pressed\n";
+		input->setKeyUp(sf::Keyboard::W);
+	}
+	if (input->isKeyDown(sf::Keyboard::J) && input->isKeyDown(sf::Keyboard::K) && input->isKeyDown(sf::Keyboard::L))
+	{
+		std::cout << "You are pressing J,K And L\n";
+		input->setKeyUp(sf::Keyboard::J);
+		input->setKeyUp(sf::Keyboard::K);
+		input->setKeyUp(sf::Keyboard::L);
+	}
+	if (input->isKeyDown(sf::Keyboard::Escape))
+	{
+		window->close();
+	}
 }
 
 // Update game objects
