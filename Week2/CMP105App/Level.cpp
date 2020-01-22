@@ -19,6 +19,10 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	posText.setCharacterSize(25);
 	posText.setFillColor(sf::Color::Red);
 	posText.setPosition(sf::Vector2f(0, 0));
+	circle.setFillColor(sf::Color::Green);
+	circle.setRadius(10);
+	circle.setOrigin(circle.getRadius(), circle.getRadius());
+	input->setMouseRDown(false);
 
 }
 
@@ -60,6 +64,10 @@ void Level::handleInput()
 		double difference = sqrt((diffInX * diffInX) + (diffInY * diffInY));
 		std::cout << "The mouse drag distance was " << difference << std::endl;
 	}
+	if (input->isMouseRDown())
+	{
+		circle.setPosition(sf::Vector2f(input->getMouseX(), input->getMouseY()));
+	}
 }
 
 // Update game objects
@@ -75,7 +83,7 @@ void Level::render()
 	beginDraw();
 
 	window->draw(posText);
-
+	window->draw(circle);
 	endDraw();
 }
 

@@ -17,6 +17,8 @@ public:
 	sf::Text posText;
 	sf::Font posFont;
 	std::string stringToDisplayPos;
+	sf::CircleShape circle;
+	sf::Vector2f circlePos;
 private:
 	// Default functions for rendering to the screen.
 	void beginDraw();
