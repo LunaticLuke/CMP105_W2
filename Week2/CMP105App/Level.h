@@ -14,7 +14,9 @@ public:
 	void handleInput();
 	void update();
 	void render();
-
+	sf::Text posText;
+	sf::Font posFont;
+	std::string stringToDisplayPos;
 private:
 	// Default functions for rendering to the screen.
 	void beginDraw();
@@ -23,6 +25,8 @@ private:
 	// Default variables for level class.
 	sf::RenderWindow* window;
 	Input* input;
+
+
 
 	// Add your object here
 

@@ -6,8 +6,16 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 {
 	window = hwnd;
 	input = in;
-
+	if (!posFont.loadFromFile("arial.ttf"))
+	{
+		std::cout << "Couldnt find font\n";
+	}
+	
 	// initialise game objects
+	posText.setFont(posFont);
+	posText.setCharacterSize(25);
+	posText.setFillColor(sf::Color::Red);
+	posText.setPosition(sf::Vector2f(0, 0));
 
 }
 
@@ -40,13 +48,16 @@ void Level::handleInput()
 // Update game objects
 void Level::update()
 {
-
+	stringToDisplayPos = std::string("Mouse's X: ") + std::to_string(input->getMouseX()) + std::string(" Mouse's Y: ") + std::to_string(input->getMouseY());
+	posText.setString(stringToDisplayPos);
 }
 
 // Render level
 void Level::render()
 {
 	beginDraw();
+
+	window->draw(posText);
 
 	endDraw();
 }
